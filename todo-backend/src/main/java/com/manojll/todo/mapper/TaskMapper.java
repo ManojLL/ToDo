@@ -13,6 +13,7 @@ public class TaskMapper implements Mapper<Task, TaskDto> {
     @Override
     public Task toEntity(TaskDto taskDto) {
         Task task = new Task();
+        task.setId(taskDto.getId());
         task.setTitle(taskDto.getTitle());
         task.setDescription(taskDto.getDescription());
         task.setCompleted(taskDto.isCompleted());
@@ -22,6 +23,7 @@ public class TaskMapper implements Mapper<Task, TaskDto> {
     @Override
     public TaskDto toDto(Task task) {
         TaskDto taskDto = new TaskDto();
+        taskDto.setId(task.getId());
         taskDto.setTitle(task.getTitle());
         taskDto.setDescription(task.getDescription());
         taskDto.setCompleted(task.isCompleted());

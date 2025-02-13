@@ -2,7 +2,7 @@ spring:
   application:
     name: todo
   datasource:
-    url: jdbc:mysql://db:3306u/todo
+    url: jdbc:mysql://localhost:3307/todo
     username: todo_user
     password: todo@1234
     driver-class-name: com.mysql.cj.jdbc.Driver
