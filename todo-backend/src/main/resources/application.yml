@@ -13,6 +13,14 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+  mvc:
+    cors:
+      mappings:
+        /api/**:
+          allowed-origins: "http://localhost:3000"
+          allowed-methods: "GET, POST, PUT, DELETE"
+          allowed-headers: "*"
+          allow-credentials: true
 
 server:
   port: 8080

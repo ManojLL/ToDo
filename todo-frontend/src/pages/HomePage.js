@@ -2,34 +2,56 @@ import React, {useState, useEffect} from 'react';
 import TaskItem from "../components/TaskItem";
 import 'bulma/css/bulma.min.css';
 import TaskForm from "../components/TaskForm";
+import {fetchTasks, saveTask, completeTask} from "../services/taskApiService";
 
 const HomePage = () => {
     const [tasks, setTasks] = useState([]);
-    const [newTask, setNewTask] = useState({title: '', description: ''});
+    const [newTask, setNewTask] = useState({title: '', description: '', completed: false});
 
-
-    const addTask = () => {
-        if (newTask.title && newTask.description) {
-            const task = { ...newTask, id: Date.now() };
-            setTasks([task, ...tasks].slice(0, 5));
-            setNewTask({ title: '', description: '' });
+    const loadTasks = async () => {
+        const data = await fetchTasks();
+        if (data) {
+            setTasks(data);
         }
     };
 
-    const completeTask = (id) => {
-        setTasks(tasks.filter(task => task.id !== id));
+    useEffect(() => {
+        loadTasks();
+    }, []);
+
+    const addTask = async () => {
+        if (newTask.title && newTask.description) {
+            const savedTask = await saveTask(newTask);
+            setTasks([savedTask, ...tasks].slice(0, 5));
+            setNewTask({title: '', description: '', completed: false});
+        }
     };
+
+    const makeCompleteTask = async (id, task) => {
+        task.completed = true;
+        const completedTask = await completeTask(id, task);
+        if(completedTask) {
+            setTasks(tasks.filter(task => task.id !== id))
+        }
+    };
+
     return (
         <div className="section">
-            <div className="container">
+            <div className='hero'>
+            </div>
+            <div className="container box">
                 <div className="columns">
                     <div className="column">
+                        <div>
                         <TaskForm newTask={newTask} setNewTask={setNewTask} addTask={addTask}/>
-                    </div>
-                    <div className="column">
-                        <div className="space-y-4">
+                        </div>
+                        <div>
+                            <hr className="has-background-grey-lighter" />
                             {tasks.map((task, index) => (
-                                <TaskItem key={task.id} task={task} completeTask={completeTask}/>
+                                <div key={task.id}>
+                                <TaskItem task={task} completeTask={makeCompleteTask}/>
+                                    <hr className="has-background-grey-lighter" />
+                                </div>
                             ))}
                         </div>
                     </div>
