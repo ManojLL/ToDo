@@ -47,7 +47,7 @@ const HomePage = () => {
                         </div>
                         <div>
                             <hr className="has-background-grey-lighter" />
-                            {tasks.map((task, index) => (
+                            {tasks.map((task) => (
                                 <div key={task.id}>
                                 <TaskItem task={task} completeTask={makeCompleteTask}/>
                                     <hr className="has-background-grey-lighter" />
