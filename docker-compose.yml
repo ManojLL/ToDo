@@ -16,30 +16,30 @@ services:
     networks:
       - todo-network
 
-#  backend:
-#    build:
-#      context: ./todo-backend
-#    ports:
-#      - "8080:8080"
-#    networks:
-#      - todo-network
-#    environment:
-#      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/todo
-#      - SPRING_DATASOURCE_USERNAME=todo_user
-#      - SPRING_DATASOURCE_PASSWORD=todo@1234
-#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-#    depends_on:
-#      - db
-#
-#  frontend:
-#    build:
-#      context: ./todo-frontend
-#    ports:
-#      - "3000:80"
-#    networks:
-#      - todo-network
-#    depends_on:
-#      - backend
+  backend:
+    build:
+      context: ./todo-backend
+    ports:
+      - "8080:8080"
+    networks:
+      - todo-network
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/todo
+      - SPRING_DATASOURCE_USERNAME=todo_user
+      - SPRING_DATASOURCE_PASSWORD=todo@1234
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - db
+
+  frontend:
+    build:
+      context: ./todo-frontend
+    ports:
+      - "3000:80"
+    networks:
+      - todo-network
+    depends_on:
+      - backend
 
 volumes:
   db-data:

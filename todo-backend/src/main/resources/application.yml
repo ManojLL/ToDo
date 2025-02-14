@@ -2,7 +2,7 @@ spring:
   application:
     name: todo
   datasource:
-    url: jdbc:mysql://localhost:3307/todo
+    url: jdbc:mysql://db:3306/todo
     username: todo_user
     password: todo@1234
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -13,6 +13,3 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
-
-server:
-  port: 8080
