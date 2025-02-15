@@ -10,12 +10,18 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.when;
 
+/**
+ * The type Task mapper test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class TaskMapperTest {
 
     @Mock
     private TaskMapper taskMapper;
 
+    /**
+     * Test to entity.
+     */
     @Test
     public void testToEntity() {
         Task task = new Task();
@@ -27,6 +33,9 @@ public class TaskMapperTest {
         assertNotNull(result);
     }
 
+    /**
+     * Test to dto.
+     */
     @Test
     public void testToDto() {
         Task task = new Task();

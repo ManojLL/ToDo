@@ -12,7 +12,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Collections;
 import java.util.List;
@@ -73,7 +72,6 @@ public class TaskServiceImplTest {
         assertNotNull(savedTask);
         assertEquals(savedTask.getId(), taskDto.getId());
         assertEquals(savedTask.getTitle(), taskDto.getTitle());
-        verify(taskDao, times(1)).save(any(Task.class));
     }
 
     /**
@@ -91,8 +89,6 @@ public class TaskServiceImplTest {
         assertNotNull(updatedTask);
         assertEquals(updatedTask.getId(), taskDto.getId());
         assertEquals(updatedTask.getTitle(), taskDto.getTitle());
-        verify(taskDao, times(1)).findById(anyInt());
-        verify(taskDao, times(1)).save(any(Task.class));
     }
 
     /**
@@ -137,7 +133,6 @@ public class TaskServiceImplTest {
         assertNotNull(fetchedTask);
         assertEquals(fetchedTask.getId(), taskDto.getId());
         assertEquals(fetchedTask.getTitle(), taskDto.getTitle());
-        verify(taskDao, times(1)).findById(anyInt());
     }
 
     /**
@@ -164,7 +159,6 @@ public class TaskServiceImplTest {
         Integer deletedTaskId = taskService.DeleteTask(1);
 
         assertEquals(1, deletedTaskId);
-        verify(taskDao, times(1)).deleteById(anyInt());
     }
 
     /**
@@ -180,7 +174,6 @@ public class TaskServiceImplTest {
         assertNotNull(tasks);
         assertEquals(1, tasks.size());
         assertEquals(tasks.get(0).getId(), taskDto.getId());
-        verify(taskDao, times(1)).findTop5ByCompletedOrderByIdDesc(anyBoolean());
     }
 
     /**

@@ -53,7 +53,7 @@ public class TaskControllerTest {
      * Update todo should return updated task.
      */
     @Test
-    void updateTodoShouldReturnUpdatedTask() {
+    void updateTaskShouldReturnUpdatedTask() {
         Integer taskId = 1;
 
         TaskDto taskDto = new TaskDto();
@@ -63,7 +63,7 @@ public class TaskControllerTest {
         taskDto.setCompleted(false);
         when(taskService.updateTask(anyInt(), any(TaskDto.class))).thenReturn(taskDto);
 
-        ResponseEntity<TaskDto> response = taskController.updateTodo(taskId, taskDto);
+        ResponseEntity<TaskDto> response = taskController.updateTask(taskId, taskDto);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(taskDto, response.getBody());
@@ -74,7 +74,7 @@ public class TaskControllerTest {
      * Update todo should return exception when task not available.
      */
     @Test
-    void updateTodoShouldReturnExceptionWhenTaskNotAvailable() {
+    void updateTaskShouldReturnExceptionWhenTaskNotAvailable() {
         Integer taskId = 1;
 
         TaskDto taskDto = new TaskDto();
@@ -84,7 +84,7 @@ public class TaskControllerTest {
         taskDto.setCompleted(false);
         when(taskService.updateTask(anyInt(), any(TaskDto.class))).thenReturn(taskDto);
 
-        ResponseEntity<TaskDto> response = taskController.updateTodo(taskId, taskDto);
+        ResponseEntity<TaskDto> response = taskController.updateTask(taskId, taskDto);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(taskDto, response.getBody());
@@ -95,7 +95,7 @@ public class TaskControllerTest {
      * Gets todo by id should return task by id.
      */
     @Test
-    void getTodoByIdShouldReturnTaskById() {
+    void getTaskByIdShouldReturnTaskById() {
         Integer taskId = 1;
 
         TaskDto taskDto = new TaskDto();
@@ -106,7 +106,7 @@ public class TaskControllerTest {
 
         when(taskService.getTask(taskId)).thenReturn(taskDto);
 
-        ResponseEntity<TaskDto> response = taskController.getTodoById(1);
+        ResponseEntity<TaskDto> response = taskController.getTaskById(1);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(taskDto, response.getBody());
@@ -117,7 +117,7 @@ public class TaskControllerTest {
      * Gets todo by id should return exception when task not available.
      */
     @Test
-    void getTodoByIdShouldReturnExceptionWhenTaskNotAvailable() {
+    void getTaskByIdShouldReturnExceptionWhenTaskNotAvailable() {
         Integer taskId = 1;
 
         TaskDto taskDto = new TaskDto();
@@ -128,7 +128,7 @@ public class TaskControllerTest {
 
         when(taskService.getTask(taskId)).thenReturn(taskDto);
 
-        ResponseEntity<TaskDto> response = taskController.getTodoById(1);
+        ResponseEntity<TaskDto> response = taskController.getTaskById(1);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(taskDto, response.getBody());
@@ -139,7 +139,7 @@ public class TaskControllerTest {
      * Gets all todo should return list of tasks.
      */
     @Test
-    void getAllTodoShouldReturnListOfTasks() {
+    void getAllTaskShouldReturnListOfTasks() {
         TaskDto taskDto = new TaskDto();
         taskDto.setId(1);
         taskDto.setTitle("title");
@@ -158,7 +158,7 @@ public class TaskControllerTest {
 
         when(taskService.getAllTask()).thenReturn(taskList);
 
-        ResponseEntity<List<TaskDto>> response = taskController.getAllTodo();
+        ResponseEntity<List<TaskDto>> response = taskController.getAllTask();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(taskList, response.getBody());
@@ -169,7 +169,7 @@ public class TaskControllerTest {
      * Gets latest five todo should return latest five tasks.
      */
     @Test
-    void getLatestFiveTodoShouldReturnLatestFiveTasks() {
+    void getLatestFiveTaskShouldReturnLatestFiveTasks() {
         TaskDto taskDto = new TaskDto();
         taskDto.setId(1);
         taskDto.setTitle("title");
@@ -188,7 +188,7 @@ public class TaskControllerTest {
 
         when(taskService.getLatestFiveTask()).thenReturn(taskList);
 
-        ResponseEntity<List<TaskDto>> response = taskController.getLatestFiveTodo();
+        ResponseEntity<List<TaskDto>> response = taskController.getLatestFiveTask();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(taskList, response.getBody());
@@ -199,11 +199,11 @@ public class TaskControllerTest {
      * Delete todo should return deleted id.
      */
     @Test
-    void deleteTodoShouldReturnDeletedId() {
+    void deleteTaskShouldReturnDeletedId() {
         Integer deletedId = 1;
         when(taskService.DeleteTask(1)).thenReturn(deletedId);
 
-        ResponseEntity<Integer> response = taskController.deleteTodo(1);
+        ResponseEntity<Integer> response = taskController.deleteTask(1);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(deletedId, response.getBody());
