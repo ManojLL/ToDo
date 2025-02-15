@@ -99,9 +99,7 @@ public class TaskServiceImplTest {
         when(taskDao.findById(anyInt())).thenReturn(Optional.of(task));
         when(taskDao.findById(anyInt())).thenReturn(Optional.empty());
 
-        TaskNotFoundException exception = assertThrows(TaskNotFoundException.class, () -> {
-            taskService.updateTask(3, taskDto);
-        });
+        TaskNotFoundException exception = assertThrows(TaskNotFoundException.class, () -> taskService.updateTask(3, taskDto));
 
         assertEquals("task not fount for id : 3", exception.getMessage());
     }
@@ -113,9 +111,7 @@ public class TaskServiceImplTest {
     void getTaskTestWhenTaskNotFound() {
         when(taskDao.findById(anyInt())).thenReturn(Optional.empty());
 
-        TaskNotFoundException exception = assertThrows(TaskNotFoundException.class, () -> {
-            taskService.getTask(1);
-        });
+        TaskNotFoundException exception = assertThrows(TaskNotFoundException.class, () -> taskService.getTask(1));
 
         assertEquals("task not fount for id : 1", exception.getMessage());
     }
@@ -142,9 +138,7 @@ public class TaskServiceImplTest {
     void deleteTaskTestWhenTaskNotFound() {
         when(taskDao.findById(anyInt())).thenReturn(Optional.empty());
 
-        TaskNotFoundException exception = assertThrows(TaskNotFoundException.class, () -> {
-            taskService.DeleteTask(1);
-        });
+        TaskNotFoundException exception = assertThrows(TaskNotFoundException.class, () -> taskService.DeleteTask(1));
 
         assertEquals("task not fount for id : 1", exception.getMessage());
     }
