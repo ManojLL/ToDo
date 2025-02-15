@@ -1,23 +1,186 @@
 package com.manojll.todo.controller;
 
+import com.manojll.todo.dto.TaskDto;
 import com.manojll.todo.service.TaskService;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 public class TaskControllerTest {
 
-    @Mock
+    @InjectMocks
     private TaskController taskController;
 
-    @Autowired
+    @Mock
     private TaskService taskService;
 
     @Test
-    public void createTaskTest() {
+    void createTaskShouldReturnCreatedTask() {
+        TaskDto taskDto = new TaskDto();
+        taskDto.setId(1);
+        taskDto.setTitle("title");
+        taskDto.setDescription("description");
+        taskDto.setCompleted(false);
 
+        when(taskService.saveTask(any(TaskDto.class))).thenReturn(taskDto);
+
+        ResponseEntity<TaskDto> response = taskController.createTask(taskDto);
+
+        assertEquals(HttpStatus.CREATED, response.getStatusCode());
+        assertEquals(taskDto, response.getBody());
+        verify(taskService, times(1)).saveTask(any(TaskDto.class));
+    }
+
+    @Test
+    void updateTodoShouldReturnUpdatedTask() {
+        Integer taskId = 1;
+
+        TaskDto taskDto = new TaskDto();
+        taskDto.setId(taskId);
+        taskDto.setTitle("updated title");
+        taskDto.setDescription("updated description");
+        taskDto.setCompleted(false);
+        when(taskService.updateTask(anyInt(), any(TaskDto.class))).thenReturn(taskDto);
+
+        ResponseEntity<TaskDto> response = taskController.updateTodo(taskId, taskDto);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(taskDto, response.getBody());
+        verify(taskService, times(1)).updateTask(anyInt(), any(TaskDto.class));
+    }
+
+    @Test
+    void updateTodoShouldReturnExceptionWhenTaskNotAvailable() {
+        Integer taskId = 1;
+
+        TaskDto taskDto = new TaskDto();
+        taskDto.setId(taskId);
+        taskDto.setTitle("updated title");
+        taskDto.setDescription("updated description");
+        taskDto.setCompleted(false);
+        when(taskService.updateTask(anyInt(), any(TaskDto.class))).thenReturn(taskDto);
+
+        ResponseEntity<TaskDto> response = taskController.updateTodo(taskId, taskDto);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(taskDto, response.getBody());
+        verify(taskService, times(1)).updateTask(anyInt(), any(TaskDto.class));
+    }
+
+    @Test
+    void getTodoByIdShouldReturnTaskById() {
+        Integer taskId = 1;
+
+        TaskDto taskDto = new TaskDto();
+        taskDto.setId(taskId);
+        taskDto.setTitle("title");
+        taskDto.setDescription("description");
+        taskDto.setCompleted(false);
+
+        when(taskService.getTask(taskId)).thenReturn(taskDto);
+
+        ResponseEntity<TaskDto> response = taskController.getTodoById(1);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(taskDto, response.getBody());
+        verify(taskService, times(1)).getTask(1);
+    }
+
+    @Test
+    void getTodoByIdShouldReturnExceptionWhenTaskNotAvailable() {
+        Integer taskId = 1;
+
+        TaskDto taskDto = new TaskDto();
+        taskDto.setId(taskId);
+        taskDto.setTitle("title");
+        taskDto.setDescription("description");
+        taskDto.setCompleted(false);
+
+        when(taskService.getTask(taskId)).thenReturn(taskDto);
+
+        ResponseEntity<TaskDto> response = taskController.getTodoById(1);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(taskDto, response.getBody());
+        verify(taskService, times(1)).getTask(1);
+    }
+
+    @Test
+    void getAllTodoShouldReturnListOfTasks() {
+        TaskDto taskDto = new TaskDto();
+        taskDto.setId(1);
+        taskDto.setTitle("title");
+        taskDto.setDescription("description");
+        taskDto.setCompleted(false);
+
+        TaskDto taskDto2 = new TaskDto();
+        taskDto.setId(2);
+        taskDto.setTitle("title");
+        taskDto.setDescription("description");
+        taskDto.setCompleted(false);
+
+        List<TaskDto> taskList = new ArrayList<>();
+        taskList.add(taskDto);
+        taskList.add(taskDto2);
+
+        when(taskService.getAllTask()).thenReturn(taskList);
+
+        ResponseEntity<List<TaskDto>> response = taskController.getAllTodo();
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(taskList, response.getBody());
+        verify(taskService, times(1)).getAllTask();
+    }
+
+    @Test
+    void getLatestFiveTodoShouldReturnLatestFiveTasks() {
+        TaskDto taskDto = new TaskDto();
+        taskDto.setId(1);
+        taskDto.setTitle("title");
+        taskDto.setDescription("description");
+        taskDto.setCompleted(false);
+
+        TaskDto taskDto2 = new TaskDto();
+        taskDto.setId(2);
+        taskDto.setTitle("title");
+        taskDto.setDescription("description");
+        taskDto.setCompleted(false);
+
+        List<TaskDto> taskList = new ArrayList<>();
+        taskList.add(taskDto);
+        taskList.add(taskDto2);
+
+        when(taskService.getLatestFiveTask()).thenReturn(taskList);
+
+        ResponseEntity<List<TaskDto>> response = taskController.getLatestFiveTodo();
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(taskList, response.getBody());
+        verify(taskService, times(1)).getLatestFiveTask();
+    }
+
+    @Test
+    void deleteTodoShouldReturnDeletedId() {
+        Integer deletedId = 1;
+        when(taskService.DeleteTask(1)).thenReturn(deletedId);
+
+        ResponseEntity<Integer> response = taskController.deleteTodo(1);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(deletedId, response.getBody());
+        verify(taskService, times(1)).DeleteTask(1);
     }
 
 }
