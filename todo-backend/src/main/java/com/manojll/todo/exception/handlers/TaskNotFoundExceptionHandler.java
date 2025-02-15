@@ -1,5 +1,6 @@
 package com.manojll.todo.exception.handlers;
 
+import com.manojll.todo.dto.ErrorMessageDto;
 import com.manojll.todo.exception.TaskNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class TaskNotFoundExceptionHandler {
      * @return the response entity
      */
     @ExceptionHandler
-    public ResponseEntity<String> handleTaskNotFoundException(TaskNotFoundException exception) {
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity<ErrorMessageDto> handleTaskNotFoundException(TaskNotFoundException exception) {
+        return new ResponseEntity<>(new ErrorMessageDto(exception.getMessage()), HttpStatus.NOT_FOUND);
     }
 }

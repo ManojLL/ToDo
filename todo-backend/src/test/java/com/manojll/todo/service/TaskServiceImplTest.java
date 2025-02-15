@@ -12,6 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +22,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+/**
+ * The type Task service impl test.
+ */
 @ExtendWith(MockitoExtension.class)
 public class TaskServiceImplTest {
 
@@ -37,6 +41,9 @@ public class TaskServiceImplTest {
 
     private TaskDto taskDto;
 
+    /**
+     * Sets up.
+     */
     @BeforeEach
     void setUp() {
         task = new Task();
@@ -52,6 +59,9 @@ public class TaskServiceImplTest {
         taskDto.setCompleted(false);
     }
 
+    /**
+     * Save task test when success.
+     */
     @Test
     void saveTaskTestWhenSuccess() {
         when(taskMapper.toEntity(any(TaskDto.class))).thenReturn(task);
@@ -66,6 +76,9 @@ public class TaskServiceImplTest {
         verify(taskDao, times(1)).save(any(Task.class));
     }
 
+    /**
+     * Update task test when success.
+     */
     @Test
     void updateTaskTestWhenSuccess() {
         when(taskDao.findById(anyInt())).thenReturn(Optional.of(task));
@@ -82,6 +95,9 @@ public class TaskServiceImplTest {
         verify(taskDao, times(1)).save(any(Task.class));
     }
 
+    /**
+     * Update task test when task is not available.
+     */
     @Test
     void updateTaskTestWhenTaskIsNotAvailable() {
         when(taskDao.findById(anyInt())).thenReturn(Optional.of(task));
@@ -94,6 +110,9 @@ public class TaskServiceImplTest {
         assertEquals("task not fount for id : 3", exception.getMessage());
     }
 
+    /**
+     * Gets task test when task not found.
+     */
     @Test
     void getTaskTestWhenTaskNotFound() {
         when(taskDao.findById(anyInt())).thenReturn(Optional.empty());
@@ -105,6 +124,9 @@ public class TaskServiceImplTest {
         assertEquals("task not fount for id : 1", exception.getMessage());
     }
 
+    /**
+     * Gets task test when success.
+     */
     @Test
     void getTaskTestWhenSuccess() {
         when(taskDao.findById(anyInt())).thenReturn(Optional.of(task));
@@ -118,6 +140,9 @@ public class TaskServiceImplTest {
         verify(taskDao, times(1)).findById(anyInt());
     }
 
+    /**
+     * Delete task test when task not found.
+     */
     @Test
     void deleteTaskTestWhenTaskNotFound() {
         when(taskDao.findById(anyInt())).thenReturn(Optional.empty());
@@ -129,6 +154,9 @@ public class TaskServiceImplTest {
         assertEquals("task not fount for id : 1", exception.getMessage());
     }
 
+    /**
+     * Delete task when success.
+     */
     @Test
     void deleteTaskWhenSuccess() {
         when(taskDao.findById(anyInt())).thenReturn(Optional.of(task));
@@ -139,6 +167,9 @@ public class TaskServiceImplTest {
         verify(taskDao, times(1)).deleteById(anyInt());
     }
 
+    /**
+     * Gets latest five task test when success.
+     */
     @Test
     void getLatestFiveTaskTestWhenSuccess() {
         when(taskDao.findTop5ByCompletedOrderByIdDesc(anyBoolean())).thenReturn(Collections.singletonList(task));
@@ -152,6 +183,9 @@ public class TaskServiceImplTest {
         verify(taskDao, times(1)).findTop5ByCompletedOrderByIdDesc(anyBoolean());
     }
 
+    /**
+     * Gets all tasks test when success.
+     */
     @Test
     void getAllTasksTestWhenSuccess() {
         when(taskDao.findAll()).thenReturn(Collections.singletonList(task));

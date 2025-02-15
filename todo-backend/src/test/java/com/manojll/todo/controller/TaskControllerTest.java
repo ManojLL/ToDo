@@ -3,10 +3,10 @@ package com.manojll.todo.controller;
 import com.manojll.todo.dto.TaskDto;
 import com.manojll.todo.service.TaskService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -17,7 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
+/**
+ * The type Task controller test.
+ */
+@ExtendWith(MockitoExtension.class)
 public class TaskControllerTest {
 
     @InjectMocks
@@ -26,6 +29,9 @@ public class TaskControllerTest {
     @Mock
     private TaskService taskService;
 
+    /**
+     * Create task should return created task.
+     */
     @Test
     void createTaskShouldReturnCreatedTask() {
         TaskDto taskDto = new TaskDto();
@@ -43,6 +49,9 @@ public class TaskControllerTest {
         verify(taskService, times(1)).saveTask(any(TaskDto.class));
     }
 
+    /**
+     * Update todo should return updated task.
+     */
     @Test
     void updateTodoShouldReturnUpdatedTask() {
         Integer taskId = 1;
@@ -61,6 +70,9 @@ public class TaskControllerTest {
         verify(taskService, times(1)).updateTask(anyInt(), any(TaskDto.class));
     }
 
+    /**
+     * Update todo should return exception when task not available.
+     */
     @Test
     void updateTodoShouldReturnExceptionWhenTaskNotAvailable() {
         Integer taskId = 1;
@@ -79,6 +91,9 @@ public class TaskControllerTest {
         verify(taskService, times(1)).updateTask(anyInt(), any(TaskDto.class));
     }
 
+    /**
+     * Gets todo by id should return task by id.
+     */
     @Test
     void getTodoByIdShouldReturnTaskById() {
         Integer taskId = 1;
@@ -98,6 +113,9 @@ public class TaskControllerTest {
         verify(taskService, times(1)).getTask(1);
     }
 
+    /**
+     * Gets todo by id should return exception when task not available.
+     */
     @Test
     void getTodoByIdShouldReturnExceptionWhenTaskNotAvailable() {
         Integer taskId = 1;
@@ -117,6 +135,9 @@ public class TaskControllerTest {
         verify(taskService, times(1)).getTask(1);
     }
 
+    /**
+     * Gets all todo should return list of tasks.
+     */
     @Test
     void getAllTodoShouldReturnListOfTasks() {
         TaskDto taskDto = new TaskDto();
@@ -144,6 +165,9 @@ public class TaskControllerTest {
         verify(taskService, times(1)).getAllTask();
     }
 
+    /**
+     * Gets latest five todo should return latest five tasks.
+     */
     @Test
     void getLatestFiveTodoShouldReturnLatestFiveTasks() {
         TaskDto taskDto = new TaskDto();
@@ -171,6 +195,9 @@ public class TaskControllerTest {
         verify(taskService, times(1)).getLatestFiveTask();
     }
 
+    /**
+     * Delete todo should return deleted id.
+     */
     @Test
     void deleteTodoShouldReturnDeletedId() {
         Integer deletedId = 1;

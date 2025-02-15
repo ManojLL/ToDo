@@ -17,7 +17,6 @@ import java.util.List;
  * The type Todo service.
  */
 @Service
-@NoArgsConstructor
 @AllArgsConstructor
 public class TaskServiceImpl implements TaskService {
 
