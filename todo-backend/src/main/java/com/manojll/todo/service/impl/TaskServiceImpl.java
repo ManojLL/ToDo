@@ -36,7 +36,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public TaskDto updateTask(Integer taskId, TaskDto taskDto) {
-        Task task = taskDao.findById(taskId).orElseThrow(
+        taskDao.findById(taskId).orElseThrow(
                 () -> new TaskNotFoundException(taskId)
         );
 

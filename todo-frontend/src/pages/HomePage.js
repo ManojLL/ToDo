@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import TaskItem from "../components/TaskItem";
 import 'bulma/css/bulma.min.css';
 import TaskForm from "../components/TaskForm";
-import {fetchTasks, saveTask, completeTask} from "../services/taskApiService";
+import {fetchTasks, saveTask, completeTask} from "../services/TaskApiService";
 
 const HomePage = () => {
     const [tasks, setTasks] = useState([]);
