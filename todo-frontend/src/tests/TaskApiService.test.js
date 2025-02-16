@@ -2,6 +2,8 @@ import {fetchTasks, saveTask, completeTask} from "../services/TaskApiService";
 
 global.fetch = jest.fn();
 
+const BASE_URL = process.env.REACT_APP_BACKEND_URL
+
 afterEach(() => {
     fetch.mockClear();
 });
@@ -15,7 +17,7 @@ test('fetchTasks should fetch top five tasks successfully', async () => {
 
     const tasks = await fetchTasks();
     expect(tasks).toEqual(mockTasks);
-    expect(fetch).toHaveBeenCalledWith('http://localhost:8080/api/v1/tasks/topFive');
+    expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/v1/tasks/topFive`);
 });
 
 test('fetchTasks should throw an error when network response is not ok', async () => {
@@ -43,7 +45,7 @@ test('saveTask should save a task successfully', async () => {
 
     const result = await saveTask(newTask);
     expect(result).toEqual(savedTask);
-    expect(fetch).toHaveBeenCalledWith('http://localhost:8080/api/v1/tasks', {
+    expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/v1/tasks`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newTask),
@@ -71,7 +73,7 @@ test('completeTask should complete a task successfully', async () => {
 
     const result = await completeTask(taskId, updatedTask);
     expect(result).toEqual(updatedTask);
-    expect(fetch).toHaveBeenCalledWith(`http://localhost:8080/api/v1/tasks/${taskId}`, {
+    expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/v1/tasks/${taskId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedTask),
