@@ -1,17 +1,33 @@
 # ToDo-Task App
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Prerequisites](#prerequisites)
+3. [Building and Running the App](#building-and-running-the-app)
+4. [Usage](#usage)
+
+## Overview
 This is a simple todo app, developed using react, spring-boot and mysql.
 
-## Table of Contents
-1. [Prerequisites](#prerequisites)
-2. [Building and Running the App](#building-and-running-the-app)
-3. [Usage](#usage)
+### Class Digram
+
+![image](https://github.com/user-attachments/assets/86dea9c0-1bce-4aac-9f51-af0f37ede551)
+
+### File stucutre
+
+```plaintext
+.
+├── docker-compose.yml 
+├── README.md
+├── todo-backend // this folder contains all backend service related to the Todo app
+└── todo-frontend  // this folder contains all UI part of the Todo app
+
+```
 
 ## Prerequisites
 
 1. Docker
 2. Docker Compose
-3. Git
-4. Java 17
    
  Additionally, make sure the following ports are free on system, as they will be used by the todo app
 
@@ -23,7 +39,7 @@ This is a simple todo app, developed using react, spring-boot and mysql.
 
 1. **Clone the Repository:** Clone the repository to local machine
     ```bash
-       https://github.com/ManojLL/ToDo.git
+    https://github.com/ManojLL/ToDo.git
     ```
 3. **Navigate to the Project Directory:**
     ```bash
