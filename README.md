@@ -23,6 +23,7 @@ This is a simple todo app, developed using react, spring-boot and mysql.
 └── todo-frontend  // this folder contains all UI part of the Todo app
 
 ```
+**E2E testings** can be fount in this [PDF](https://drive.google.com/file/d/1caY0sbP0yWQqJIV8xP1S8pq9Hwrjxqb7/view?usp=sharing) file. 
 
 ## Prerequisites
 
