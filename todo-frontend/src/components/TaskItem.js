@@ -7,7 +7,7 @@ const TaskItem = ({task, completeTask}) => {
             <div className="grid">
                 <div className="cell is-col-span-4 ">
                     <div>
-                        <h3 className="title">{task.title}</h3>
+                        <h3 className="title is-5">{task.title}</h3>
                         <p>{task.description}</p>
                     </div>
                 </div>

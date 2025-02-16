@@ -12,10 +12,13 @@ code {
     monospace;
 }
 
-.hero {
-  /*background-image:;*/
-  height: 10%;
+.img {
+    background-image: url('assets/backgound.jpeg');
+    background-size: cover;
+    width:100%;
   position: fixed;
+    height: 40vh;
+    opacity: 0.5;
 }
 .form-item-boarder {
   border: 2px solid #323230;
