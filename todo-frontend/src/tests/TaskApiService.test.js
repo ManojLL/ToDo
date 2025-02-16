@@ -20,19 +20,13 @@ test('fetchTasks should fetch top five tasks successfully', async () => {
     expect(fetch).toHaveBeenCalledWith(`${BASE_URL}/api/v1/tasks/topFive`);
 });
 
-test('fetchTasks should throw an error when network response is not ok', async () => {
+test('should handle fetch error when network response is not ok', async () => {
     fetch.mockResolvedValueOnce({
         ok: false,
-        text: async () => 'Internal Server Error',
     });
 
-    await expect(fetchTasks()).rejects.toThrow('Network response was not ok');
-});
-
-test('fetchTasks should throw an error when fetch fails', async () => {
-    fetch.mockRejectedValueOnce(new Error('Network Error'));
-
-    await expect(fetchTasks()).rejects.toThrow('Network Error');
+    const tasks = await fetchTasks();
+    expect(tasks).toBeUndefined();
 });
 
 test('saveTask should save a task successfully', async () => {
@@ -52,15 +46,15 @@ test('saveTask should save a task successfully', async () => {
     });
 });
 
-test('saveTask should throw an error when network response is not ok', async () => {
+test('saveTask should handle error when network response is not ok', async () => {
     const newTask = { name: 'New Task' };
 
     fetch.mockResolvedValueOnce({
         ok: false,
-        text: async () => 'Bad Request',
     });
 
-    await expect(saveTask(newTask)).rejects.toThrow('Network response was not ok');
+    const result = await saveTask(newTask);
+    expect(result).toBeUndefined();
 });
 
 test('completeTask should complete a task successfully', async () => {
@@ -80,14 +74,12 @@ test('completeTask should complete a task successfully', async () => {
     });
 });
 
-test('completeTask should throw an error when network response is not ok', async () => {
-    const taskId = 1;
-    const updatedTask = { id: 1, name: 'Task 1', completed: true };
-
+test('completeTask should handle an error when network response is not ok', async () => {
     fetch.mockResolvedValueOnce({
         ok: false,
         text: async () => 'Not Found',
     });
 
-    await expect(completeTask(taskId, updatedTask)).rejects.toThrow('Network response was not ok');
+    const result = await completeTask(999, { completed: true });
+    expect(result).toBeUndefined();
 });

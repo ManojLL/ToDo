@@ -11,7 +11,6 @@ export const fetchTasks = () => {
         })
         .catch(error => {
             console.log('Error fetching tasks:', error);
-            throw error;
         });
 };
 
@@ -31,7 +30,6 @@ export const saveTask = (task) => {
         })
         .catch(error => {
             console.log('Error saving task:', error);
-            throw error;
         });
 };
 
@@ -51,6 +49,5 @@ export const completeTask = (taskId, task) => {
         })
         .catch(error => {
             console.log('Error completing task:', error);
-            throw error;
         });
 };

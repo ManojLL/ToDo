@@ -13,7 +13,7 @@ const TaskForm = ({newTask, setNewTask, addTask}) => (
             <textarea className="textarea mb-4 is-dark" placeholder="Description" value={newTask.description} rows="2"
                    onChange={(e) => setNewTask({...newTask, description: e.target.value})}/>
                 <div className="cell">
-                    <button className="button is-warning is-rounded is-pulled-right is-large" onClick={addTask}>
+                    <button className="button is-warning is-rounded is-pulled-right" onClick={addTask}>
                         <span className="icon"><i className="fas fa-plus"></i> </span></button>
                 </div>
             </div>

@@ -9,7 +9,7 @@ const HomePage = () => {
     const [newTask, setNewTask] = useState({title: '', description: '', completed: false});
 
     const loadTasks = async () => {
-        const data = await fetchTasks().then();
+        const data = await fetchTasks();
         if (data) {
             setTasks(data);
         }

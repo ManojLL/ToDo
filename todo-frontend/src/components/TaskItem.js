@@ -12,7 +12,7 @@ const TaskItem = ({task, completeTask}) => {
                     </div>
                 </div>
                 <div className="cell">
-                    <button className="button is-link is-large is-rounded is-pulled-right"  style={{ display: 'flex', justifyContent: 'center' }} onClick={() => completeTask(task.id, task)}>
+                    <button className="button is-link is-rounded is-pulled-right"  style={{ display: 'flex', justifyContent: 'center' }} onClick={() => completeTask(task.id, task)}>
                         <span className="icon is-small"><i className="fas fa-check"></i></span>
                     </button>
                 </div>
