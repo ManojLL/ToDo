@@ -1,4 +1,4 @@
-const BACKEND_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_BASE_URL = 'http://localhost:8080';
 const API_URL = BACKEND_BASE_URL+'/api/v1/tasks';
 
 export const fetchTasks = () => {

@@ -2,7 +2,7 @@ import {fetchTasks, saveTask, completeTask} from "../services/TaskApiService";
 
 global.fetch = jest.fn();
 
-const BASE_URL = process.env.REACT_APP_BACKEND_URL
+const BASE_URL = 'http://localhost:8080'
 
 afterEach(() => {
     fetch.mockClear();
