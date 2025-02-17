@@ -44,7 +44,7 @@ This is a simple todo app, developed using react, spring-boot and mysql.
     ```
 3. **Navigate to the Project Directory:**
     ```bash
-    cd Todo/
+    cd ToDo/
     ```
 5. **Build and Run the App Using Docker Compose**
    ```bash
