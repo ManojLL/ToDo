@@ -40,15 +40,15 @@ This is a simple todo app, developed using react, spring-boot and mysql. This To
 
 ## Building and Running the App
 
-1. **Clone the Repository:** Clone the repository to local machine
+1. **Clone the repository:** Clone the repository to local machine
     ```bash
     https://github.com/ManojLL/ToDo.git
     ```
-3. **Navigate to the Project Directory:**
+3. **Navigate to the project directory:**
     ```bash
     cd ToDo/
     ```
-5. **Build and Run the App Using Docker Compose**
+5. **Build and run theaApp  using Docker Compose**
    ```bash
    docker compose up -d
    ```
