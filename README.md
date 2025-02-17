@@ -50,7 +50,7 @@ This is a simple todo app, developed using react, spring-boot and mysql. This To
     ```
 5. **Build and Run the App Using Docker Compose**
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 This command will build the Docker images for both the React frontend, Spring Boot backend and batabse
 
